@@ -9,6 +9,7 @@ import {
   ChevronDown,
   Clock3,
   Coffee,
+  ConciergeBell,
   Flame,
   Instagram,
   Mail,
@@ -70,7 +71,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Hospedaje tradicional en el Casco Histórico de Mérida. Habitaciones con baño privado, Wi-Fi, estacionamiento y atención 24 horas.",
+          "Hospedaje tradicional en el Casco Histórico de Mérida. Habitaciones con baño privado, Wi-Fi, estacionamiento y atención personalizada.",
       },
       { property: "og:title", content: "Posada Luz Caraballo | Mérida" },
       {
@@ -162,18 +163,18 @@ function Index() {
             <a href="tel:+582742525441" title="Teléfono">
               <Phone size={22} />
             </a>
-            <Link to="/habitaciones" title="Habitaciones">
-              <BedDouble size={22} />
-            </Link>
-            <a href="#ubicacion" title="Ubicación">
-              <MapPin size={22} />
-            </a>
           </div>
         </div>
         <nav className="desktop-nav" aria-label="Navegación principal">
-          <Link to="/habitaciones">Habitaciones</Link>
-          <a href="#servicios">Servicios</a>
-          <a href="#ubicacion">Ubicación</a>
+          <Link to="/habitaciones" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <BedDouble size={18} /> Habitaciones
+          </Link>
+          <a href="#servicios" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <ConciergeBell size={18} /> Servicios
+          </a>
+          <a href="#ubicacion" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <MapPin size={18} /> Ubicación
+          </a>
         </nav>
       </header>
 
@@ -205,11 +206,8 @@ function Index() {
             <strong>alojamiento en Mérida</strong> para disfrutar en familia con todas las
             comodidades.
           </p>
-                    <div className="intro-actions" style={{ marginTop: '20px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-            <Link to="/habitaciones" className="clay-button" style={{ textDecoration: 'none' }}>
-              <BedDouble size={20} /> Crear reservación
-            </Link>
-            <Link to="/disponibilidad" className="clay-button" style={{ textDecoration: 'none', background: 'var(--cream)', color: 'var(--ink)' }}>
+          <div className="intro-actions" style={{ marginTop: '20px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+            <Link to="/disponibilidad" className="clay-button" style={{ textDecoration: 'none' }}>
               <CalendarCheck size={20} /> Consultar disponibilidad
             </Link>
           </div>
@@ -246,9 +244,8 @@ function Index() {
           <div className="seo-feature">
             <h2>Alojamiento Seguro</h2>
             <p>
-              Tu tranquilidad es prioridad. Contamos con estacionamiento privado, vigilancia y
-              planta eléctrica para que tu <strong>alojamiento en Mérida</strong> sea cómodo, seguro
-              y sin interrupciones las 24 horas del día.
+              Tu tranquilidad es prioridad. Contamos con estacionamiento privado y vigilancia para que tu <strong>alojamiento en Mérida</strong> sea cómodo, seguro
+              y descanses plenamente.
             </p>
           </div>
         </div>
@@ -509,7 +506,13 @@ function Index() {
 
       <footer className="site-footer">
         <BrandMark />
-        <p>Tradición y confort en el corazón de Mérida.</p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '8px' }} className="footer-center">
+          <p style={{ margin: 0 }}>Tradición y confort en el corazón de Mérida.</p>
+          <div style={{ width: '100%', height: '1px', background: 'color-mix(in oklab, var(--cream) 20%, transparent)' }}></div>
+          <a href="https://g.page/r/CUjat0PnKn4bEBE/review" target="_blank" rel="noreferrer" style={{ fontSize: '0.85rem', color: 'var(--cream)', opacity: 0.85, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            Califícanos con ⭐⭐⭐⭐⭐ en Google
+          </a>
+        </div>
         <a href={whatsapp} target="_blank" rel="noreferrer">
           <WhatsAppIcon size={18} /> Escríbenos por WhatsApp
         </a>

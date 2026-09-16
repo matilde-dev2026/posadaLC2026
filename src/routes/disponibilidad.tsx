@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { BedDouble, MessageCircle, Phone, CalendarCheck } from "lucide-react";
+import { BedDouble, MessageCircle, Phone, CalendarCheck, MapPin, ConciergeBell } from "lucide-react";
+import { CalendarAvailability } from "../components/CalendarAvailability";
 import "../styles.css";
 
 export const Route = createFileRoute('/disponibilidad')({
@@ -56,9 +57,9 @@ function Disponibilidad() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const text = `Hola, me gustaría consultar disponibilidad.%0A%0A*Mis datos:*%0ANombre: ${formData.name}%0ADocumento: ${formData.docType}-${formData.docNumber}%0ATeléfono: ${formData.phone}%0ACiudad: ${formData.city}%0A%0A*Detalles de la estancia:*%0AFechas: ${formData.checkInDate} al ${formData.checkOutDate}%0AHuéspedes: ${formData.guests}%0AHabitaciones deseadas: ${formData.rooms}${formData.details ? `%0A%0A*Dudas adicionales:* ${formData.details}` : ''}`;
+    const rawText = `Hola, me gustaría consultar disponibilidad.\n\n*Mis datos:*\nNombre: ${formData.name}\nDocumento: ${formData.docType}-${formData.docNumber}\nTeléfono: ${formData.phone}\nCiudad: ${formData.city}\n\n*Detalles de la estancia:*\nFechas: ${formData.checkInDate} al ${formData.checkOutDate}\nHuéspedes: ${formData.guests}\nHabitaciones deseadas: ${formData.rooms}${formData.details ? `\n\n*Dudas adicionales:* ${formData.details}` : ''}`;
     
-    const url = `https://wa.me/584247081640?text=${text}`;
+    const url = `https://wa.me/584247081640?text=${encodeURIComponent(rawText)}`;
     window.open(url, "_blank");
   };
 
@@ -84,15 +85,18 @@ function Disponibilidad() {
             <a href="tel:+582742525441" title="Teléfono">
               <Phone size={22} />
             </a>
-            <Link to="/habitaciones" title="Habitaciones">
-              <BedDouble size={22} />
-            </Link>
           </div>
         </div>
         <nav className="desktop-nav" aria-label="Navegación principal">
-          <Link to="/habitaciones">Habitaciones</Link>
-          <a href="/#servicios">Servicios</a>
-          <a href="/#ubicacion">Ubicación</a>
+          <Link to="/habitaciones" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <BedDouble size={18} /> Habitaciones
+          </Link>
+          <a href="/#servicios" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <ConciergeBell size={18} /> Servicios
+          </a>
+          <a href="/#ubicacion" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <MapPin size={18} /> Ubicación
+          </a>
         </nav>
       </header>
       
@@ -166,6 +170,8 @@ function Disponibilidad() {
                 <input type="date" name="checkOutDate" required value={formData.checkOutDate} onChange={handleInputChange} style={{ width: "100%", padding: "12px 15px", borderRadius: "8px", border: "1px solid var(--border)", fontFamily: "inherit", fontSize: "1rem" }} />
               </div>
             </div>
+
+            <CalendarAvailability checkIn={formData.checkInDate} checkOut={formData.checkOutDate} />
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "20px" }}>
               <div className="form-group">

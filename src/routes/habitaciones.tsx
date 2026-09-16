@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { BedDouble, ShoppingCart, ArrowLeft, X, MessageCircle, Phone, ChevronLeft, ChevronRight } from "lucide-react";
+import { BedDouble, ShoppingCart, ArrowLeft, X, MessageCircle, Phone, ChevronLeft, ChevronRight, MapPin, ConciergeBell } from "lucide-react";
+import { CalendarAvailability } from "../components/CalendarAvailability";
 import "../styles.css";
 
 export const Route = createFileRoute('/habitaciones')({
@@ -218,9 +219,9 @@ function Habitaciones() {
     }
 
     const roomsList = cart.map(r => r.name).join(", ");
-    const text = `Hola, me gustaría consultar la disponibilidad de: *${roomsList}*.%0A%0A*Mis datos:*%0ANombre: ${formData.name}%0ADocumento: ${formData.docType}-${formData.docNumber}%0ATeléfono: ${formData.phone}%0ACiudad: ${formData.city}%0A%0A*Detalles de la estancia:*%0ACheck-in: ${formData.checkInDate}%0ACheck-out: ${formData.checkOutDate}%0AHuéspedes: ${formData.guests}${formData.details ? `%0A%0A*Dudas adicionales:* ${formData.details}` : ''}`;
+    const rawText = `Hola, me gustaría consultar la disponibilidad de: *${roomsList}*.\n\n*Mis datos:*\nNombre: ${formData.name}\nDocumento: ${formData.docType}-${formData.docNumber}\nTeléfono: ${formData.phone}\nCiudad: ${formData.city}\n\n*Detalles de la estancia:*\nCheck-in: ${formData.checkInDate}\nCheck-out: ${formData.checkOutDate}\nHuéspedes: ${formData.guests}${formData.details ? `\n\n*Dudas adicionales:* ${formData.details}` : ''}`;
     
-    const url = `https://wa.me/584247081640?text=${text}`;
+    const url = `https://wa.me/584247081640?text=${encodeURIComponent(rawText)}`;
     window.open(url, "_blank");
   };
 
@@ -246,16 +247,19 @@ function Habitaciones() {
             <a href="tel:+582742525441" title="Teléfono">
               <Phone size={22} />
             </a>
-            <Link to="/habitaciones" title="Habitaciones">
-              <BedDouble size={22} />
-            </Link>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
           <nav className="desktop-nav" aria-label="Navegación principal">
-            <Link to="/habitaciones">Habitaciones</Link>
-            <a href="/#servicios">Servicios</a>
-            <a href="/#ubicacion">Ubicación</a>
+            <Link to="/habitaciones" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <BedDouble size={18} /> Habitaciones
+            </Link>
+            <a href="/#servicios" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <ConciergeBell size={18} /> Servicios
+            </a>
+            <a href="/#ubicacion" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <MapPin size={18} /> Ubicación
+            </a>
           </nav>
           <button 
             onClick={() => setIsCartOpen(true)}
@@ -332,7 +336,7 @@ function Habitaciones() {
           </p>
         </div>
 
-        <div style={{ backgroundColor: "#d4d4d8", padding: "clamp(20px, 5vw, 30px)", width: "100%" }}>
+        <div style={{ backgroundColor: "#d4d4d8", padding: "15px", width: "100%" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "15px", margin: "0 auto" }}>
             {rooms.map((room) => (
               <RoomCard key={room.id} room={room} onAdd={addToCart} />
@@ -399,6 +403,9 @@ function Habitaciones() {
                           <input type="date" name="checkOutDate" required value={formData.checkOutDate} onChange={handleInputChange} style={{ width: "100%", padding: "10px", borderRadius: "6px", border: "1px solid var(--border)", fontFamily: "inherit" }} />
                         </div>
                       </div>
+
+                      <CalendarAvailability checkIn={formData.checkInDate} checkOut={formData.checkOutDate} />
+
                       <div className="form-group">
                         <label style={{ fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", color: "var(--muted-foreground)" }}>Nombre Completo</label>
                         <input type="text" name="name" required placeholder="Ej: Luz Caraballo" value={formData.name} onChange={handleInputChange} style={{ width: "100%", padding: "10px", borderRadius: "6px", border: "1px solid var(--border)", fontFamily: "inherit" }} />
