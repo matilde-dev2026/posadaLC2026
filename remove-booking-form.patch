@@ -1,0 +1,107 @@
+--- src/routes/index.tsx
++++ src/routes/index.tsx
+@@ -124,103 +124,6 @@
+   );
+ }
+ 
+-function BookingForm() {
+-  const [formData, setFormData] = useState({
+-    checkInDate: "",
+-    checkInTime: "",
+-    checkOutDate: "",
+-    checkOutTime: "",
+-    guests: "",
+-    name: "",
+-    phone: "",
+-    docType: "V",
+-    docNumber: "",
+-    city: "",
+-    details: "",
+-  });
+-
+-  const handleChange = (e: any) => {
+-    setFormData({ ...formData, [e.target.name]: e.target.value });
+-  };
+-
+-  const handleSubmit = (e: any) => {
+-    e.preventDefault();
+-    const text = `Hola! Quiero reservar en la Posada Luz Caraballo.%0A%0A*Detalles:*%0AEntrada: ${formData.checkInDate} a las ${formData.checkInTime}%0ASalida: ${formData.checkOutDate} a las ${formData.checkOutTime}%0AHuéspedes: ${formData.guests}%0A%0A*Mis Datos:*%0ANombre: ${formData.name}%0ATeléfono: ${formData.phone}%0ADocumento: ${formData.docType}-${formData.docNumber}%0ACiudad: ${formData.city}%0A%0ADetalles/Dudas: ${formData.details}`;
+-    const url = `https://wa.me/584247081640?text=${text}`;
+-    window.open(url, "_blank");
+-  };
+-
+-  return (
+-    <form className="booking-form" onSubmit={handleSubmit}>
+-      <h3 className="booking-form-title">Consultar Disponibilidad</h3>
+-      <div className="form-grid">
+-        <div className="form-group">
+-          <label>Entrada (Fecha y Hora)</label>
+-          <div className="flex-row">
+-            <input type="date" name="checkInDate" required value={formData.checkInDate} onChange={handleChange} />
+-            <input type="time" name="checkInTime" required value={formData.checkInTime} onChange={handleChange} />
+-          </div>
+-        </div>
+-        <div className="form-group">
+-          <label>Salida (Fecha y Hora)</label>
+-          <div className="flex-row">
+-            <input type="date" name="checkOutDate" required value={formData.checkOutDate} onChange={handleChange} />
+-            <input type="time" name="checkOutTime" required value={formData.checkOutTime} onChange={handleChange} />
+-          </div>
+-        </div>
+-        <div className="form-group">
+-          <label>Cantidad de Huéspedes</label>
+-          <input type="number" min="1" name="guests" required placeholder="Ej: 2" value={formData.guests} onChange={handleChange} />
+-        </div>
+-        <div className="form-group">
+-          <label>Nombre Completo</label>
+-          <input type="text" name="name" required placeholder="Ej: Luz Caraballo" value={formData.name} onChange={handleChange} />
+-        </div>
+-        <div className="form-group">
+-          <label>Teléfono</label>
+-          <input type="tel" name="phone" required placeholder="Ej: 0414..." value={formData.phone} onChange={handleChange} />
+-        </div>
+-        <div className="form-group">
+-          <label>Documento</label>
+-          <div className="flex-row">
+-            <select name="docType" value={formData.docType} onChange={handleChange} style={{ flex: '0 0 80px', width: '80px' }}>
+-              <option value="V">V</option>
+-              <option value="E">E</option>
+-              <option value="J">J</option>
+-              <option value="P">P</option>
+-            </select>
+-            <input type="text" name="docNumber" required placeholder="Número" value={formData.docNumber} onChange={handleChange} style={{ flex: 1 }} />
+-          </div>
+-        </div>
+-        <div className="form-group" style={{ gridColumn: "1 / -1" }}>
+-          <label>Ciudad de procedencia</label>
+-          <input type="text" name="city" required placeholder="Ej: Caracas" value={formData.city} onChange={handleChange} />
+-        </div>
+-        <div className="form-group" style={{ gridColumn: "1 / -1" }}>
+-          <label>Detalles, preguntas adicionales o dudas</label>
+-          <textarea name="details" rows={3} value={formData.details} onChange={handleChange} placeholder="Ej: ¿Qué tipo de descuentos ofrecen?"></textarea>
+-        </div>
+-      </div>
+-      <button type="submit" className="clay-button submit-btn clay-button-whatsapp">
+-        <WhatsAppIcon size={20} />
+-        Enviar por WhatsApp
+-      </button>
+-    </form>
+-  );
+-}
+-
+ function Index() {
+   const whatsapp = "https://wa.me/584247081640";
+ 
+@@ -301,7 +204,11 @@
+             <strong>alojamiento en Mérida</strong> para disfrutar en familia con todas las
+             comodidades.
+           </p>
+-          <BookingForm />
++          <div className="intro-actions" style={{ marginTop: '20px' }}>
++            <Link to="/habitaciones" className="clay-button" style={{ textDecoration: 'none' }}>
++              <BedDouble size={20} /> Ver Habitaciones
++            </Link>
++          </div>
+         </div>
+       </motion.section>
+ 

@@ -1,0 +1,1 @@
+sed -i 's/import { BedDouble, ShoppingCart, ArrowLeft, X, MessageCircle, Phone } from "lucide-react";/import { BedDouble, ShoppingCart, ArrowLeft, X, MessageCircle, Phone, ChevronLeft, ChevronRight } from "lucide-react";/' src/routes/habitaciones.tsx
