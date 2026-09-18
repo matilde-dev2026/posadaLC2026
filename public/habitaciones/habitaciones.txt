@@ -1,1 +1,7 @@
 Habitaciones:
+- Habitación 11 - Quíntuple (5 personas)
+- Habitación 27 - Triple (3 personas)
+- Habitación 41 - Matrimonial (2 personas)
+- Habitación 43 - Séxtuple (6 personas)
+- Habitación 44 - Matrimonial (2 personas)
+- Habitación 45 - Doble (2 personas)

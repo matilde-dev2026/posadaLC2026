@@ -60,7 +60,8 @@ a { color: inherit; text-decoration: none; }
 
 .site-shell { overflow: hidden; min-height: 100vh; background-image: radial-gradient(circle at 25% 20%, oklch(1 0 0 / 0.35) 0 1px, transparent 1.5px); background-size: 18px 18px; }
 .site-header { position: relative; z-index: 20; display: flex; width: 100%; align-items: center; justify-content: space-between; padding: 22px max(20px, calc((100% - 1180px) / 2)); background: #2b1d18; color: var(--cream); }
-.header-left { display: flex; align-items: center; gap: 40px; }
+.header-left { display: flex; align-items: center; gap: 24px; }
+.header-divider { width: 3px; height: 38px; background: color-mix(in oklab, var(--cream) 35%, transparent); border-radius: 2px; flex-shrink: 0; }
 .header-icons { display: flex; align-items: center; gap: 16px; }
 .header-icons a { color: inherit; opacity: 0.8; transition: opacity 0.2s ease, transform 0.2s ease; display: flex; align-items: center; justify-content: center; }
 .header-icons a:hover { opacity: 1; transform: scale(1.1); }
@@ -190,7 +191,8 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 620px) {
   .site-header { width: 100%; padding: 24px 16px; align-items: flex-start; }
-  .header-left { flex-direction: column; align-items: center; gap: 24px; width: 100%; }
+  .header-left { flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+  .header-divider { width: 100%; max-width: 220px; height: 3px; background: color-mix(in oklab, var(--cream) 30%, transparent); border-radius: 2px; }
   .header-icons { gap: 20px; width: 100%; justify-content: center; }
   .site-header .clay-button { display: none; }
   .brand-mark strong { font-size: 1.1rem; }

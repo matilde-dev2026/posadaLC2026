@@ -78,6 +78,7 @@ function Disponibilidad() {
               <small>Mérida · Venezuela</small>
             </span>
           </Link>
+          <div className="header-divider" aria-hidden="true" />
           <div className="header-icons">
             <a href="https://wa.me/584247081640" target="_blank" rel="noreferrer" title="WhatsApp">
               <WhatsAppIcon size={22} />

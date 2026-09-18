@@ -153,6 +153,7 @@ function Index() {
       <header className="site-header">
         <div className="header-left">
           <BrandMark />
+          <div className="header-divider" aria-hidden="true" />
           <div className="header-icons">
             <a href={whatsapp} target="_blank" rel="noreferrer" title="WhatsApp">
               <WhatsAppIcon size={22} />
