@@ -1,19 +1,19 @@
-const fs = require('fs');
+const fs = require("fs");
 
 function fixFile(file) {
-  let code = fs.readFileSync(file, 'utf-8');
-  
+  let code = fs.readFileSync(file, "utf-8");
+
   // The corruption happened because of $`
   // The string looks like:
   // (Preceding Text) + (sectionContent up to $`) + (Preceding Text again) + (Rest of sectionContent) + "\n" + (mainTag) + (Rest of file)
-  
+
   // It's probably easier to just re-generate the file, but we can also just split by "import { useState } from \"react\";"
   // Wait, if "import { useState }" appears twice, we can just cut from the second one!
-  
+
   const marker = 'import { useState } from "react";';
   const first = code.indexOf(marker);
   const second = code.indexOf(marker, first + 1);
-  
+
   if (second !== -1) {
     // There is a duplication!
     // But wait, the sectionContent before $` is:
@@ -46,11 +46,9 @@ function fixFile(file) {
                   style={isColored ? { background: \color-mix(in oklab, var(--primary) \${intensity}%, color-mix(in oklab, var(--clay-deep) 88%, var(--cream)))
     */
     // The backtick in \`color-mix is where $` happened!
-    
     // Let's just find the first `import { useState } from "react";` and everything before it, which is the corrupted section part.
     // Actually, wait, the file starts with:
     // import { useState } from "react";import { Link, createF<motion.section ...
     // Ah! It overwrote the start of the file? No, the preceding text was `import { useState } from "react";import { Link, createF`.
-    
   }
 }

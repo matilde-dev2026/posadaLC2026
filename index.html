@@ -1,26 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Posada Luz Caraballo</title>
-    <meta name="description" content="Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar." />
+    <title>Posada Luz Caraballo | Hospedaje Turístico en Mérida</title>
+    <meta
+      name="description"
+      content="Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar frente a la Plaza Milla."
+    />
+
+    <!-- Canonical URL & Open Graph URL -->
+    <link rel="canonical" id="canonical-link" href="" />
+    <meta property="og:url" id="og-url" content="" />
+    <meta property="og:site_name" content="Posada Luz Caraballo" />
 
     <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Posada Luz Caraballo" />
-    <meta property="og:description" content="Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar." />
+    <meta property="og:title" content="Posada Luz Caraballo | Hospedaje Turístico en Mérida" />
+    <meta
+      property="og:description"
+      content="Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar frente a la Plaza Milla."
+    />
     <meta property="og:image" content="/logo-posada-lc.png" />
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Posada Luz Caraballo" />
-    <meta name="twitter:description" content="Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar." />
+    <meta name="twitter:title" content="Posada Luz Caraballo | Hospedaje Turístico en Mérida" />
+    <meta
+      name="twitter:description"
+      content="Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar frente a la Plaza Milla."
+    />
     <meta name="twitter:image" content="/logo-posada-lc.png" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LodgingBusiness",
+        "name": "Posada Luz Caraballo",
+        "description": "Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar frente a la Plaza Milla.",
+        "telephone": "+58-274-2525441",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Mérida",
+          "addressRegion": "Mérida",
+          "addressCountry": "VE"
+        },
+        "priceRange": "$$",
+        "currenciesAccepted": "USD, VEF",
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Estacionamiento privado",
+            "value": true
+          },
+          { "@type": "LocationFeatureSpecification", "name": "Agua caliente", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Televisión", "value": true },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Toallas, jabón y papel",
+            "value": true
+          },
+          { "@type": "LocationFeatureSpecification", "name": "Servicios de hotel", "value": true }
+        ]
+      }
+    </script>
+
+    <!-- Early canonical link initialization before JS hydration -->
+    <script>
+      (function () {
+        try {
+          var origin = window.location.origin;
+          var path = window.location.pathname.replace(/\/+$/, "") || "/";
+          var canonicalUrl = origin + path;
+          var link = document.getElementById("canonical-link");
+          if (link) link.setAttribute("href", canonicalUrl);
+          var ogUrl = document.getElementById("og-url");
+          if (ogUrl) ogUrl.setAttribute("content", canonicalUrl);
+          var ogImg = document.querySelector('meta[property="og:image"]');
+          if (
+            ogImg &&
+            ogImg.getAttribute("content") &&
+            ogImg.getAttribute("content").startsWith("/")
+          ) {
+            ogImg.setAttribute("content", origin + ogImg.getAttribute("content"));
+          }
+          var twImg = document.querySelector('meta[name="twitter:image"]');
+          if (
+            twImg &&
+            twImg.getAttribute("content") &&
+            twImg.getAttribute("content").startsWith("/")
+          ) {
+            twImg.setAttribute("content", origin + twImg.getAttribute("content"));
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" href="/favicon-posada-lc-144x144.ico" type="image/x-icon" />
   </head>
   <body>

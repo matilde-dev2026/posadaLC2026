@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 
 const ratesSection = `
         <motion.section className="rooms-section page-section" style={{ padding: "0" }}>
@@ -59,24 +59,34 @@ const ratesSection = `
 // Let's just read the file, find the header end, find the main start, and reconstruct the file!
 
 function repair(file, mainTag) {
-  let code = fs.readFileSync(file, 'utf-8');
-  
+  let code = fs.readFileSync(file, "utf-8");
+
   // The original string we want to find is the entire content BEFORE the corruption.
   // We can just find `import { useState } from "react";` up to `</header>`
-  const headerEnd = code.indexOf('</header>');
+  const headerEnd = code.indexOf("</header>");
   if (headerEnd === -1) return;
-  const originalTop = code.substring(0, headerEnd + '</header>'.length);
-  
+  const originalTop = code.substring(0, headerEnd + "</header>".length);
+
   // Then the main tag is `mainTag`
   const mainPos = code.lastIndexOf(mainTag);
   if (mainPos === -1) return;
   const originalBottom = code.substring(mainPos);
-  
+
   // Now reconstruct!
-  const fixedCode = originalTop + "\n" + ratesSection + "\n<div style={{ height: '60px' }}></div>\n" + originalBottom;
+  const fixedCode =
+    originalTop +
+    "\n" +
+    ratesSection +
+    "\n<div style={{ height: '60px' }}></div>\n" +
+    originalBottom;
   fs.writeFileSync(file, fixedCode);
 }
 
-repair('src/routes/habitaciones.tsx', '<main style={{ padding: "40px max(20px, calc((100% - 1120px) / 2))" }}>');
-repair('src/routes/disponibilidad.tsx', '<main style={{ padding: "40px 20px", maxWidth: "800px", margin: "0 auto", marginTop: "80px" }}>');
-
+repair(
+  "src/routes/habitaciones.tsx",
+  '<main style={{ padding: "40px max(20px, calc((100% - 1120px) / 2))" }}>',
+);
+repair(
+  "src/routes/disponibilidad.tsx",
+  '<main style={{ padding: "40px 20px", maxWidth: "800px", margin: "0 auto", marginTop: "80px" }}>',
+);

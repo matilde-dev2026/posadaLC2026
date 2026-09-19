@@ -1,0 +1,6 @@
+{
+  "name": "Posada Luz Caraballo",
+  "description": "Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

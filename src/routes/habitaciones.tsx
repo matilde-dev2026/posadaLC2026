@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  BedDouble,
   ShoppingCart,
   ArrowLeft,
   X,
@@ -12,6 +11,8 @@ import {
   ChevronRight,
   MapPin,
   ConciergeBell,
+  CalendarCheck,
+  BedDouble,
 } from "lucide-react";
 import { CalendarAvailability } from "../components/CalendarAvailability";
 import "../styles.css";
@@ -185,6 +186,7 @@ function RoomCard({ room, onAdd }) {
             <img
               src={room.images[currentImage]}
               alt=""
+              aria-hidden="true"
               style={{
                 position: "absolute",
                 top: 0,
@@ -198,7 +200,7 @@ function RoomCard({ room, onAdd }) {
             />
             <img
               src={room.images[currentImage]}
-              alt={room.name}
+              alt={`${room.name} en Posada Luz Caraballo - Habitaciones de hospedería y posada familiar con baño privado, agua caliente, televisión, toallas, jabón, papel y servicios de hotel para una estancia perfecta en Mérida`}
               style={{
                 position: "absolute",
                 top: 0,
@@ -470,7 +472,7 @@ function Habitaciones() {
             <span className="brand-sun" aria-hidden="true">
               <img
                 src="/logo-posada-lc.png"
-                alt="Logo LC"
+                alt="Posada familiar Luz Caraballo - Hospedería y hotel en Mérida con habitaciones confortables"
                 width={60}
                 height={60}
                 style={{ borderRadius: "50%", objectFit: "cover" }}
@@ -500,12 +502,18 @@ function Habitaciones() {
             <a href="tel:+582742525441" title="Teléfono">
               <Phone size={22} />
             </a>
+            <Link to="/disponibilidad" title="Reservas" aria-label="Reservas">
+              <CalendarCheck size={22} />
+            </Link>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
           <nav className="desktop-nav" aria-label="Navegación principal">
-            <Link to="/habitaciones" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-              <BedDouble size={18} /> Habitaciones
+            <Link
+              to="/disponibilidad"
+              style={{ display: "flex", alignItems: "center", gap: "6px" }}
+            >
+              <CalendarCheck size={18} /> Reservas
             </Link>
             <a href="/#servicios" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
               <ConciergeBell size={18} /> Servicios
@@ -549,7 +557,12 @@ function Habitaciones() {
           </div>
           <div className="bcv-logo">
             <div className="bcv-circle">
-              <img src="/bcv-sf.png" alt="Logo Banco Central de Venezuela" width={90} height={90} />
+              <img
+                src="/bcv-sf.png"
+                alt="Tasa oficial BCV para tarifas de habitaciones y estancia en posada familiar y hotel"
+                width={90}
+                height={90}
+              />
             </div>
           </div>
         </div>
@@ -626,6 +639,97 @@ function Habitaciones() {
             ))}
           </div>
         </div>
+
+        <footer className="site-footer" style={{ marginTop: "40px" }}>
+          <div className="site-footer-top">
+            <Link to="/" className="brand-mark" aria-label="Posada Luz Caraballo, inicio">
+              <span className="brand-sun" aria-hidden="true">
+                <img
+                  src="/logo-posada-lc.png"
+                  alt="Posada familiar Luz Caraballo - Hospedería y hotel en Mérida con habitaciones confortables"
+                  width={60}
+                  height={60}
+                  style={{ borderRadius: "50%", objectFit: "cover" }}
+                />
+              </span>
+              <span>
+                <strong>Posada Luz Caraballo</strong>
+                <small
+                  style={{
+                    fontSize: "0.6rem",
+                    marginTop: "2px",
+                    opacity: 0.85,
+                    textTransform: "none",
+                    letterSpacing: "normal",
+                  }}
+                >
+                  RIF: V-10714105-3
+                </small>
+                <small>Mérida · Venezuela</small>
+              </span>
+            </Link>
+            <div className="footer-divider" aria-hidden="true" />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+                gap: "8px",
+              }}
+              className="footer-center"
+            >
+              <p style={{ margin: 0 }}>Tradición y confort en el corazón de Mérida.</p>
+              <div
+                style={{
+                  width: "100%",
+                  height: "1px",
+                  background: "color-mix(in oklab, var(--cream) 20%, transparent)",
+                }}
+              ></div>
+              <a
+                href="https://g.page/r/CUjat0PnKn4bEBE/review"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  fontSize: "0.85rem",
+                  color: "var(--cream)",
+                  opacity: 0.85,
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
+              >
+                Califícanos con ⭐⭐⭐⭐⭐ en Google
+              </a>
+            </div>
+            <div className="footer-divider" aria-hidden="true" />
+            <Link
+              to="/habitaciones"
+              className="footer-action-link"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                lineHeight: 1,
+                textAlign: "center",
+                textDecoration: "none",
+              }}
+            >
+              <BedDouble size={18} style={{ display: "block", flexShrink: 0 }} />
+              <span style={{ display: "inline-flex", alignItems: "center", lineHeight: 1 }}>
+                Ver Habitaciones
+              </span>
+            </Link>
+          </div>
+          <div className="site-footer-bottom">
+            <p className="footer-copyright">
+              © 2026 Posada Luz Caraballo | Posada Turística en Mérida
+            </p>
+          </div>
+        </footer>
       </main>
 
       <AnimatePresence>

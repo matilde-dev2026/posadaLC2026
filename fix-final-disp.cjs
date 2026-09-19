@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 
 const content = `import { useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
@@ -227,4 +227,4 @@ function Disponibilidad() {
 }
 `;
 
-fs.writeFileSync('src/routes/disponibilidad.tsx', content);
+fs.writeFileSync("src/routes/disponibilidad.tsx", content);

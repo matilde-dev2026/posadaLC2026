@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 
 const roomRatesCode = `
 const roomRates = [
@@ -58,26 +58,36 @@ const ratesSection = `
 
 function inject(file, mainMarker) {
   if (fs.existsSync(file)) {
-    let code = fs.readFileSync(file, 'utf-8');
-    
-    if (code.includes('Tarifas 2026')) return; // already injected
-    
+    let code = fs.readFileSync(file, "utf-8");
+
+    if (code.includes("Tarifas 2026")) return; // already injected
+
     // Add roomRates array right after imports or WhatsAppIcon
-    const insertPos = code.indexOf('function');
+    const insertPos = code.indexOf("function");
     if (insertPos !== -1) {
       code = code.substring(0, insertPos) + roomRatesCode + "\n" + code.substring(insertPos);
     }
-    
+
     // Inject the section as the first child of <main>
     const mainPos = code.indexOf(mainMarker);
     if (mainPos !== -1) {
-       const injectAt = mainPos + mainMarker.length;
-       code = code.substring(0, injectAt) + "\n" + ratesSection + "\n<div style={{ height: '60px' }}></div>\n" + code.substring(injectAt);
+      const injectAt = mainPos + mainMarker.length;
+      code =
+        code.substring(0, injectAt) +
+        "\n" +
+        ratesSection +
+        "\n<div style={{ height: '60px' }}></div>\n" +
+        code.substring(injectAt);
     }
     fs.writeFileSync(file, code);
   }
 }
 
-inject('src/routes/habitaciones.tsx', '<main style={{ padding: "40px max(20px, calc((100% - 1120px) / 2))" }}>');
-inject('src/routes/disponibilidad.tsx', '<main style={{ padding: "40px 20px", maxWidth: "800px", margin: "0 auto", marginTop: "80px" }}>');
-
+inject(
+  "src/routes/habitaciones.tsx",
+  '<main style={{ padding: "40px max(20px, calc((100% - 1120px) / 2))" }}>',
+);
+inject(
+  "src/routes/disponibilidad.tsx",
+  '<main style={{ padding: "40px 20px", maxWidth: "800px", margin: "0 auto", marginTop: "80px" }}>',
+);

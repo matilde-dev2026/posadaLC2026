@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 
@@ -64,6 +65,76 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const ROUTE_SEO: Record<string, { title: string; description: string }> = {
+  "/": {
+    title: "Posada Luz Caraballo | Hospedaje Turístico en Mérida",
+    description:
+      "Tu hospedaje turístico en Mérida. Tradición, descanso y la mejor atención familiar frente a la Plaza Milla.",
+  },
+  "/habitaciones": {
+    title: "Habitaciones y Tarifas | Posada Luz Caraballo",
+    description:
+      "Conoce nuestras cómodas habitaciones matrimoniales, dobles, triples y familiares con baño privado y agua caliente en Mérida.",
+  },
+  "/disponibilidad": {
+    title: "Consultar Disponibilidad y Reservas | Posada Luz Caraballo",
+    description:
+      "Verifica disponibilidad en tiempo real y gestiona tu reserva directa por WhatsApp con atención inmediata.",
+  },
+};
+
+function CanonicalManager() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const rawPath = location.pathname || "/";
+    const cleanPath = rawPath === "/" ? "/" : rawPath.replace(/\/+$/, "").toLowerCase();
+    const origin = window.location.origin;
+    const canonicalUrl = `${origin}${cleanPath}`;
+
+    // 1. Maintain <link rel="canonical">
+    let canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalUrl);
+
+    // 2. Maintain <meta property="og:url">
+    let ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');
+    if (!ogUrl) {
+      ogUrl = document.createElement("meta");
+      ogUrl.setAttribute("property", "og:url");
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.setAttribute("content", canonicalUrl);
+
+    // 3. Keep Titles and Meta Descriptions synchronized
+    const seo = ROUTE_SEO[cleanPath] || ROUTE_SEO["/"];
+    document.title = seo.title;
+
+    const descMeta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute("content", seo.description);
+
+    const ogTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", seo.title);
+
+    const ogDesc = document.querySelector<HTMLMetaElement>('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute("content", seo.description);
+
+    const twTitle = document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute("content", seo.title);
+
+    const twDesc = document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]');
+    if (twDesc) twDesc.setAttribute("content", seo.description);
+  }, [location.pathname]);
+
+  return null;
+}
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -75,6 +146,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <CanonicalManager />
       <Outlet />
     </QueryClientProvider>
   );

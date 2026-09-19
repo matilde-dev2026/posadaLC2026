@@ -1,6 +1,6 @@
-const fs = require('fs');
+const fs = require("fs");
 
-let code = fs.readFileSync('src/routes/disponibilidad.tsx', 'utf-8');
+let code = fs.readFileSync("src/routes/disponibilidad.tsx", "utf-8");
 
 // The file starts with `import { useState } from "react";import { Link, createF<motion.section`
 // We know the original was:
@@ -8,11 +8,11 @@ let code = fs.readFileSync('src/routes/disponibilidad.tsx', 'utf-8');
 // import { Link, createFileRoute } from "@tanstack/react-router";
 // import { motion } from "motion/react";
 // import { BedDouble, Instagram, MapPin, MessageCircle, Phone, CalendarCheck } from "lucide-react";
-// 
+//
 // export const Route = createFileRoute('/disponibilidad')({
 //   component: Disponibilidad,
 // })
-// 
+//
 // const WhatsAppIcon = ({ size = 24, strokeWidth = 2, className = "" }) => (
 //   <svg
 

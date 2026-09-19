@@ -24,7 +24,7 @@ import {
   Wifi,
 } from "lucide-react";
 
-const WhatsAppIcon = ({ size = 24, strokeWidth = 2, className = "" }) => (
+const WhatsAppIcon = ({ size = 24, strokeWidth = 2, className = "", style = {} }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -36,6 +36,7 @@ const WhatsAppIcon = ({ size = 24, strokeWidth = 2, className = "" }) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    style={{ display: "block", flexShrink: 0, verticalAlign: "middle", ...style }}
   >
     <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
     <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
@@ -111,11 +112,27 @@ function BrandMark() {
   return (
     <a href="#inicio" className="brand-mark" aria-label="Posada Luz Caraballo, inicio">
       <span className="brand-sun" aria-hidden="true">
-        <img src="/logo-posada-lc.png" alt="Logo LC" width={60} height={60} style={{ borderRadius: '50%', objectFit: 'cover' }} />
+        <img
+          src="/logo-posada-lc.png"
+          alt="Posada familiar Luz Caraballo - Hospedería tradicional y hotel con estacionamiento en Mérida"
+          width={60}
+          height={60}
+          style={{ borderRadius: "50%", objectFit: "cover" }}
+        />
       </span>
       <span>
         <strong>Posada Luz Caraballo</strong>
-        <small style={{ fontSize: '0.6rem', marginTop: '2px', opacity: 0.85, textTransform: 'none', letterSpacing: 'normal' }}>RIF: V-10714105-3</small>
+        <small
+          style={{
+            fontSize: "0.6rem",
+            marginTop: "2px",
+            opacity: 0.85,
+            textTransform: "none",
+            letterSpacing: "normal",
+          }}
+        >
+          RIF: V-10714105-3
+        </small>
         <small>Mérida · Venezuela</small>
       </span>
     </a>
@@ -128,8 +145,8 @@ function Index() {
 
   useEffect(() => {
     // Reset scroll position on page reload
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
     }
     window.scrollTo(0, 0);
   }, []);
@@ -138,14 +155,14 @@ function Index() {
     initial: { opacity: 0, x: -60 },
     whileInView: { opacity: 1, x: 0 },
     transition: { duration: 0.7, ease: "easeOut" },
-    viewport: { once: false, amount: 0.15 }
+    viewport: { once: false, amount: 0.15 },
   };
 
   const scaleFromMiddle = {
     initial: { opacity: 0, scale: 0.85 },
     whileInView: { opacity: 1, scale: 1 },
     transition: { duration: 0.7, ease: "easeOut" },
-    viewport: { once: false, amount: 0.15 }
+    viewport: { once: false, amount: 0.15 },
   };
 
   return (
@@ -164,16 +181,35 @@ function Index() {
             <a href="tel:+582742525441" title="Teléfono">
               <Phone size={22} />
             </a>
+            <Link
+              to="/disponibilidad"
+              title="Reservas"
+              aria-label="Reservas"
+              className="mobile-only-icon"
+            >
+              <CalendarCheck size={22} />
+            </Link>
+            <Link
+              to="/habitaciones"
+              title="Habitaciones"
+              aria-label="Habitaciones"
+              className="mobile-only-icon"
+            >
+              <BedDouble size={22} />
+            </Link>
           </div>
         </div>
         <nav className="desktop-nav" aria-label="Navegación principal">
-          <Link to="/habitaciones" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <Link to="/disponibilidad" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <CalendarCheck size={18} /> Reservas
+          </Link>
+          <Link to="/habitaciones" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
             <BedDouble size={18} /> Habitaciones
           </Link>
-          <a href="#servicios" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <a href="#servicios" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
             <ConciergeBell size={18} /> Servicios
           </a>
-          <a href="#ubicacion" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <a href="#ubicacion" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
             <MapPin size={18} /> Ubicación
           </a>
         </nav>
@@ -185,7 +221,7 @@ function Index() {
           <img
             className="hero-image"
             src="/hero-posada.jpg"
-            alt="Fachada de la Posada Luz Caraballo en Mérida"
+            alt="Fachada de Posada Luz Caraballo, hospedería y posada familiar con estacionamiento privado y servicios de hotel en Mérida"
             width={1920}
             height={1080}
           />
@@ -198,17 +234,20 @@ function Index() {
           <h1 id="hero-title">
             Posada en Mérida
             <br />
-            Tu Hospedaje Merideño  
-             <br />
-             🚘   👨‍👩‍👧‍👦
+            Tu Hospedaje Merideño
+            <br />
+            🚘 👨‍👩‍👧‍👦
           </h1>
           <p className="intro-lead">
             Tradición, descanso y una atención cercana en el Casco Histórico. El mejor{" "}
             <strong>alojamiento en Mérida</strong> para disfrutar en familia con todas las
             comodidades.
           </p>
-          <div className="intro-actions" style={{ marginTop: '20px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-            <Link to="/disponibilidad" className="clay-button" style={{ textDecoration: 'none' }}>
+          <div
+            className="intro-actions"
+            style={{ marginTop: "20px", display: "flex", gap: "15px", flexWrap: "wrap" }}
+          >
+            <Link to="/disponibilidad" className="clay-button" style={{ textDecoration: "none" }}>
               <CalendarCheck size={20} /> Consultar disponibilidad
             </Link>
           </div>
@@ -217,7 +256,11 @@ function Index() {
 
       <motion.div className="seo-features" {...scaleFromMiddle}>
         <div className="seo-column">
-          <img className="seo-image" src="/IMG_0242 (1).jpg" alt="Instalaciones de la posada" />
+          <img
+            className="seo-image"
+            src="/IMG_0242 (1).jpg"
+            alt="Habitaciones confortables en Posada Luz Caraballo, hospedería con baño privado, agua caliente, toallas y televisión"
+          />
           <div className="seo-feature">
             <h2>Habitaciones en Mérida</h2>
             <p>
@@ -229,7 +272,11 @@ function Index() {
         </div>
 
         <div className="seo-column">
-          <img className="seo-image" src="/IMG_0254 (1).jpg" alt="Detalle de instalaciones" />
+          <img
+            className="seo-image"
+            src="/IMG_0254 (1).jpg"
+            alt="Estancia tranquila en posada familiar con servicios de hotel, jabón, papel higiénico y toallas incluidas"
+          />
           <div className="seo-feature">
             <h2>Hospedaje Céntrico</h2>
             <p>
@@ -241,12 +288,17 @@ function Index() {
         </div>
 
         <div className="seo-column">
-          <img className="seo-image" src="/IMG_0300 (1).jpg" alt="Comodidades de la posada" />
+          <img
+            className="seo-image"
+            src="/IMG_0300 (1).jpg"
+            alt="Estacionamiento privado y seguro para una estancia cómoda en nuestro hotel y posada familiar"
+          />
           <div className="seo-feature">
             <h2>Alojamiento Seguro</h2>
             <p>
-              Tu tranquilidad es prioridad. Contamos con estacionamiento privado y vigilancia para que tu <strong>alojamiento en Mérida</strong> sea cómodo, seguro
-              y descanses plenamente.
+              Tu tranquilidad es prioridad. Contamos con estacionamiento privado y vigilancia para
+              que tu <strong>alojamiento en Mérida</strong> sea cómodo, seguro y descanses
+              plenamente.
             </p>
           </div>
         </div>
@@ -256,7 +308,7 @@ function Index() {
         <img
           className="hero-image"
           src="/posada-frente.JPG"
-          alt="Otra vista de la Posada Luz Caraballo"
+          alt="Entrada de la posada y hospedería turística con estacionamiento y servicios de hotel en Mérida"
           width={1920}
           height={1080}
         />
@@ -297,7 +349,7 @@ function Index() {
         <img
           className="hero-image"
           src="/recepcion-posada-luz-caraballo.jpg"
-          alt="Recepción de la Posada Luz Caraballo"
+          alt="Recepción y servicios de hotel en Posada Luz Caraballo, hospedería y posada familiar con atención 24 horas"
           width={1920}
           height={1080}
         />
@@ -310,12 +362,18 @@ function Index() {
             <h2>Una habitación para cada viaje</h2>
             <p>
               Precios por noche en dólares estadounidenses. Consulta disponibilidad para tus fechas.
-              Los precios del dólar se calculan a la tasa del día según el Banco Central de Venezuela.
+              Los precios del dólar se calculan a la tasa del día según el Banco Central de
+              Venezuela.
             </p>
           </div>
           <div className="bcv-logo">
             <div className="bcv-circle">
-              <img src="/bcv-sf.png" alt="Logo Banco Central de Venezuela" width={90} height={90} />
+              <img
+                src="/bcv-sf.png"
+                alt="Tasa oficial BCV para cotización de habitaciones y estancia en hotel y posada familiar"
+                width={90}
+                height={90}
+              />
             </div>
           </div>
         </div>
@@ -323,12 +381,18 @@ function Index() {
           {roomRates.map((rate, index) => {
             const isColored = index % 2 === 0;
             const intensity = 25 + (index / 2) * 25;
-            
+
             return (
               <article
                 className={index === 6 ? "rate-row rate-row-featured" : "rate-row"}
                 key={rate.room}
-                style={isColored ? { background: `color-mix(in oklab, var(--primary) ${intensity}%, color-mix(in oklab, var(--clay-deep) 88%, var(--cream)))` } : undefined}
+                style={
+                  isColored
+                    ? {
+                        background: `color-mix(in oklab, var(--primary) ${intensity}%, color-mix(in oklab, var(--clay-deep) 88%, var(--cream)))`,
+                      }
+                    : undefined
+                }
               >
                 <span className="rate-number">{String(index + 1).padStart(2, "0")}</span>
                 <div>
@@ -344,7 +408,7 @@ function Index() {
           })}
         </div>
         <div className="center-action">
-          <Link to="/habitaciones" className="clay-button" style={{ textDecoration: 'none' }}>
+          <Link to="/habitaciones" className="clay-button" style={{ textDecoration: "none" }}>
             <BedDouble size={20} /> Ver Habitaciones
           </Link>
         </div>
@@ -354,7 +418,7 @@ function Index() {
         <img
           className="hero-image"
           src="/comodidades.jpg"
-          alt="Comodidades de la Posada Luz Caraballo"
+          alt="Servicios de hotel y comodidades de la estancia: televisión, agua caliente, toallas limpias, jabón, papel y estacionamiento"
           width={1920}
           height={1080}
         />
@@ -365,8 +429,8 @@ function Index() {
         <h2>Todo lo necesario para una estancia tranquila.</h2>
         <div className="amenities-grid">
           {amenities.map(({ icon: Icon, label }, index) => (
-            <motion.div 
-              className="amenity" 
+            <motion.div
+              className="amenity"
               key={label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -391,7 +455,7 @@ function Index() {
         <img
           className="hero-image"
           src="/IMG_0231 (1).jpg"
-          alt="Exterior de la Posada Luz Caraballo"
+          alt="Estancia y fachada exterior de la posada familiar con estacionamiento en el centro histórico de Mérida"
           width={1920}
           height={1080}
         />
@@ -444,26 +508,53 @@ function Index() {
             <MapPin size={14} /> Cómo llegar
           </a>
         </div>
-        <div className="location-panel mobile-spaced" style={{ display: 'flex', flexDirection: 'column', height: '100%', paddingBottom: '25px' }}>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', marginTop: 0, marginBottom: '20px' }}>A pasos de la Plaza de Milla.</h2>
-          <div className="desktop-location-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-            <div className="section-kicker" style={{ marginBottom: 0 }}>Encuéntranos</div>
+        <div
+          className="location-panel mobile-spaced"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            paddingBottom: "25px",
+          }}
+        >
+          <h2 style={{ fontSize: "clamp(2rem, 4vw, 2.5rem)", marginTop: 0, marginBottom: "20px" }}>
+            A pasos de la Plaza de Milla.
+          </h2>
+          <div
+            className="desktop-location-header"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "20px",
+            }}
+          >
+            <div className="section-kicker" style={{ marginBottom: 0 }}>
+              Encuéntranos
+            </div>
             <a
               className="clay-button clay-button-dark"
               href="https://www.google.com/maps/search/?api=1&query=Av.+2+Lora+13-80+Plaza+Sucre+Milla+Merida+Venezuela"
               target="_blank"
               rel="noreferrer"
-              style={{ minHeight: '36px', height: '36px', padding: '0 12px', fontSize: '0.85rem', whiteSpace: 'nowrap' }}
+              style={{
+                minHeight: "36px",
+                height: "36px",
+                padding: "0 12px",
+                fontSize: "0.85rem",
+                whiteSpace: "nowrap",
+              }}
             >
               <MapPin size={16} /> Abrir en Google Maps
             </a>
           </div>
-          <div style={{ marginTop: 'auto' }}>
-            <p style={{ fontWeight: 700, marginBottom: '4px', fontSize: '1rem' }}>
+          <div style={{ marginTop: "auto" }}>
+            <p style={{ fontWeight: 700, marginBottom: "4px", fontSize: "1rem" }}>
               Av. 2 Lora, N.º 13-80, frente a la Plaza Sucre (Milla), Mérida, Venezuela.
             </p>
-            <p className="mobile-hidden-text" style={{ marginTop: 0, fontSize: '1rem' }}>
-              Una ubicación estratégica para descubrir los principales puntos turísticos de la ciudad.
+            <p className="mobile-hidden-text" style={{ marginTop: 0, fontSize: "1rem" }}>
+              Una ubicación estratégica para descubrir los principales puntos turísticos de la
+              ciudad.
             </p>
           </div>
         </div>
@@ -475,12 +566,20 @@ function Index() {
           <a href="tel:+584247081640">
             <Phone size={20} /> 0424-7081640
           </a>
+          <a href={whatsapp} target="_blank" rel="noreferrer">
+            <WhatsAppIcon size={20} /> Escríbenos por WhatsApp
+          </a>
+          <Link to="/disponibilidad">
+            <CalendarCheck size={20} /> Disponibilidad
+          </Link>
           <a href="https://www.instagram.com/posada_luzcaraballo/" target="_blank" rel="noreferrer">
             <Instagram size={20} /> @posada_luzcaraballo
           </a>
           <div className="check-times">
             <div style={{ gridColumn: "1 / -1" }}>
-              <p className="contact-label" style={{ marginBottom: "8px" }}>Horarios</p>
+              <p className="contact-label" style={{ marginBottom: "8px" }}>
+                Horarios
+              </p>
             </div>
             <div>
               <small>Hora Hotelera (Entrada / Salida)</small>
@@ -491,7 +590,9 @@ function Index() {
               <strong>6:30 AM – 9:00 PM</strong>
             </div>
             <div style={{ gridColumn: "1 / -1", marginTop: "8px" }}>
-              <p className="contact-label" style={{ marginBottom: "8px" }}>Estacionamiento</p>
+              <p className="contact-label" style={{ marginBottom: "8px" }}>
+                Estacionamiento
+              </p>
             </div>
             <div>
               <small>Entrada</small>
@@ -506,17 +607,69 @@ function Index() {
       </motion.section>
 
       <footer className="site-footer">
-        <BrandMark />
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '8px' }} className="footer-center">
-          <p style={{ margin: 0 }}>Tradición y confort en el corazón de Mérida.</p>
-          <div style={{ width: '100%', height: '1px', background: 'color-mix(in oklab, var(--cream) 20%, transparent)' }}></div>
-          <a href="https://g.page/r/CUjat0PnKn4bEBE/review" target="_blank" rel="noreferrer" style={{ fontSize: '0.85rem', color: 'var(--cream)', opacity: 0.85, textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            Califícanos con ⭐⭐⭐⭐⭐ en Google
-          </a>
+        <div className="site-footer-top">
+          <BrandMark />
+          <div className="footer-divider" aria-hidden="true" />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              gap: "8px",
+            }}
+            className="footer-center"
+          >
+            <p style={{ margin: 0 }}>Tradición y confort en el corazón de Mérida.</p>
+            <div
+              style={{
+                width: "100%",
+                height: "1px",
+                background: "color-mix(in oklab, var(--cream) 20%, transparent)",
+              }}
+            ></div>
+            <a
+              href="https://g.page/r/CUjat0PnKn4bEBE/review"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                fontSize: "0.85rem",
+                color: "var(--cream)",
+                opacity: 0.85,
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              Califícanos con ⭐⭐⭐⭐⭐ en Google
+            </a>
+          </div>
+          <div className="footer-divider" aria-hidden="true" />
+          <Link
+            to="/habitaciones"
+            className="footer-action-link"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              lineHeight: 1,
+              textAlign: "center",
+              textDecoration: "none",
+            }}
+          >
+            <BedDouble size={18} style={{ display: "block", flexShrink: 0 }} />
+            <span style={{ display: "inline-flex", alignItems: "center", lineHeight: 1 }}>
+              Ver Habitaciones
+            </span>
+          </Link>
         </div>
-        <a href={whatsapp} target="_blank" rel="noreferrer">
-          <WhatsAppIcon size={18} /> Escríbenos por WhatsApp
-        </a>
+        <div className="site-footer-bottom">
+          <p className="footer-copyright">
+            © 2026 Posada Luz Caraballo | Posada Turística en Mérida
+          </p>
+        </div>
       </footer>
     </main>
   );

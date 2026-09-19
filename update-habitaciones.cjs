@@ -1,9 +1,9 @@
-const fs = require('fs');
-let code = fs.readFileSync('src/routes/habitaciones.tsx', 'utf-8');
+const fs = require("fs");
+let code = fs.readFileSync("src/routes/habitaciones.tsx", "utf-8");
 
 // Replace the simple header with the full header from index.tsx
 const headerStart = code.indexOf('<header className="site-header"');
-const headerEnd = code.indexOf('</header>') + 9;
+const headerEnd = code.indexOf("</header>") + 9;
 
 const fullHeader = `
       <header className="site-header">
@@ -58,10 +58,12 @@ const fullHeader = `
 code = code.substring(0, headerStart) + fullHeader + code.substring(headerEnd);
 
 // Replace the image grid layout
-const gridOldStart = code.indexOf('<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))"');
+const gridOldStart = code.indexOf(
+  '<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))"',
+);
 if (gridOldStart !== -1) {
-  const gridOldEnd = code.indexOf('</div>', code.indexOf('))}')) + 6;
-  
+  const gridOldEnd = code.indexOf("</div>", code.indexOf("))}")) + 6;
+
   const newGrid = `<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px", backgroundColor: "rgba(0,0,0,0.05)" }}>
                 {room.images.map((img: string, i: number) => (
                   <div key={i} style={{ 
@@ -74,8 +76,8 @@ if (gridOldStart !== -1) {
                   </div>
                 ))}
               </div>`;
-              
+
   code = code.substring(0, gridOldStart) + newGrid + code.substring(gridOldEnd);
 }
 
-fs.writeFileSync('src/routes/habitaciones.tsx', code);
+fs.writeFileSync("src/routes/habitaciones.tsx", code);
