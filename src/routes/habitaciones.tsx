@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -14,7 +14,6 @@ import {
   CalendarCheck,
   BedDouble,
 } from "lucide-react";
-import { CalendarAvailability } from "../components/CalendarAvailability";
 import "../styles.css";
 
 export const Route = createFileRoute("/habitaciones")({
@@ -417,8 +416,10 @@ function RoomCard({ room, onAdd }) {
   );
 }
 
+type RoomItem = (typeof rooms)[number];
+
 function Habitaciones() {
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<RoomItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -432,21 +433,23 @@ function Habitaciones() {
     guests: 1,
   });
 
-  const addToCart = (room) => {
+  const addToCart = (room: RoomItem) => {
     setCart([...cart, room]);
   };
 
-  const removeFromCart = (index) => {
+  const removeFromCart = (index: number) => {
     const newCart = [...cart];
     newCart.splice(index, 1);
     setCart(newCart);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (cart.length === 0) {
@@ -915,11 +918,6 @@ function Habitaciones() {
                           />
                         </div>
                       </div>
-
-                      <CalendarAvailability
-                        checkIn={formData.checkInDate}
-                        checkOut={formData.checkOutDate}
-                      />
 
                       <div className="form-group">
                         <label

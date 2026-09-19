@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import {
@@ -9,7 +9,6 @@ import {
   MapPin,
   ConciergeBell,
 } from "lucide-react";
-import { CalendarAvailability } from "../components/CalendarAvailability";
 import "../styles.css";
 
 export const Route = createFileRoute("/disponibilidad")({
@@ -59,11 +58,13 @@ function Disponibilidad() {
     rooms: "",
   });
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const rawText = `Hola, me gustaría consultar disponibilidad.\n\n*Mis datos:*\nNombre: ${formData.name}\nDocumento: ${formData.docType}-${formData.docNumber}\nTeléfono: ${formData.phone}\nCiudad: ${formData.city}\n\n*Detalles de la estancia:*\nFechas: ${formData.checkInDate} al ${formData.checkOutDate}\nHuéspedes: ${formData.guests}\nHabitaciones deseadas: ${formData.rooms}${formData.details ? `\n\n*Dudas adicionales:* ${formData.details}` : ""}`;
 
@@ -134,7 +135,7 @@ function Disponibilidad() {
         <div className="section-heading">
           <div className="section-heading-content">
             <div className="section-kicker">Tarifas 2026</div>
-            <h2>Una habitación para cada viaje</h2>
+            <h2>Precios de nuestras habitaciones</h2>
             <p>
               Precios por noche en dólares estadounidenses. Consulta disponibilidad para tus fechas.
               Los precios del dólar se calculan a la tasa del día según el Banco Central de
@@ -287,8 +288,6 @@ function Disponibilidad() {
                 />
               </div>
             </div>
-
-            <CalendarAvailability checkIn={formData.checkInDate} checkOut={formData.checkOutDate} />
 
             <div
               style={{

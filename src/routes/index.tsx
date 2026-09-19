@@ -359,7 +359,7 @@ function Index() {
         <div className="section-heading">
           <div className="section-heading-content">
             <div className="section-kicker">Tarifas 2026</div>
-            <h2>Una habitación para cada viaje</h2>
+            <h2>Habitaciones para turistas y locales</h2>
             <p>
               Precios por noche en dólares estadounidenses. Consulta disponibilidad para tus fechas.
               Los precios del dólar se calculan a la tasa del día según el Banco Central de

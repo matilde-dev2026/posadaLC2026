@@ -53,7 +53,7 @@ export const googleSignIn = async (): Promise<{ user: User; accessToken: string 
 
     cachedAccessToken = credential.accessToken;
     return { user: result.user, accessToken: cachedAccessToken };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Sign in error:", error);
     throw error;
   } finally {
