@@ -379,20 +379,28 @@ function Index() {
         </div>
         <div className="rate-board">
           {roomRates.map((rate, index) => {
-            const isColored = index % 2 === 0;
-            const intensity = 25 + (index / 2) * 25;
+            const rowBg =
+              index === 0
+                ? "color-mix(in oklab, var(--orange-intense) 64%, var(--cream))"
+                : index === 2
+                  ? "color-mix(in oklab, var(--orange-intense) 78%, var(--cream))"
+                  : index === 4
+                    ? "color-mix(in oklab, var(--orange-intense) 90%, var(--cream))"
+                    : index === 6
+                      ? "var(--orange-intense)"
+                      : index === 1
+                        ? "color-mix(in oklab, var(--clay-deep) 68%, var(--cream))"
+                        : index === 3
+                          ? "color-mix(in oklab, var(--clay-deep) 84%, var(--cream))"
+                          : index === 5
+                            ? "color-mix(in oklab, var(--clay-deep) 82%, var(--ink))"
+                            : undefined;
 
             return (
               <article
                 className={index === 6 ? "rate-row rate-row-featured" : "rate-row"}
                 key={rate.room}
-                style={
-                  isColored
-                    ? {
-                        background: `color-mix(in oklab, var(--primary) ${intensity}%, color-mix(in oklab, var(--clay-deep) 88%, var(--cream)))`,
-                      }
-                    : undefined
-                }
+                style={rowBg ? { background: rowBg } : undefined}
               >
                 <span className="rate-number">{String(index + 1).padStart(2, "0")}</span>
                 <div>

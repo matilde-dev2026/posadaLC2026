@@ -135,9 +135,42 @@ const roomRates = [
   { room: "Séxtuple", guests: "6 huéspedes", price: 65 },
 ];
 
-function RoomCard({ room, onAdd }) {
+function getRoomRateColor(roomNameOrType: string): string {
+  const normalized = roomNameOrType.toLowerCase();
+  const index = roomRates.findIndex((rate) => normalized.includes(rate.room.toLowerCase()));
+  if (index === -1) {
+    return "var(--primary)";
+  }
+  // Tonos naranja degradados a partir de 07 (05 el más intenso de los tres, 01 el menos intenso)
+  if (index === 0) {
+    return "color-mix(in oklab, var(--orange-intense) 64%, var(--cream))";
+  }
+  if (index === 2) {
+    return "color-mix(in oklab, var(--orange-intense) 78%, var(--cream))";
+  }
+  if (index === 4) {
+    return "color-mix(in oklab, var(--orange-intense) 90%, var(--cream))";
+  }
+  if (index === 6) {
+    return "var(--orange-intense)";
+  }
+  // Tonos marrón degradados: 02 (más claro), 04, 06 (más oscuro)
+  if (index === 1) {
+    return "color-mix(in oklab, var(--clay-deep) 68%, var(--cream))";
+  }
+  if (index === 3) {
+    return "color-mix(in oklab, var(--clay-deep) 84%, var(--cream))";
+  }
+  if (index === 5) {
+    return "color-mix(in oklab, var(--clay-deep) 82%, var(--ink))";
+  }
+  return "color-mix(in oklab, var(--clay-deep) 88%, var(--cream))";
+}
+
+function RoomCard({ room, onAdd }: { room: RoomItem; onAdd: (room: RoomItem) => void }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [showAddedMsg, setShowAddedMsg] = useState(false);
+  const cardBgColor = getRoomRateColor(room.name);
 
   const nextImage = (e) => {
     e.stopPropagation();
@@ -310,7 +343,7 @@ function RoomCard({ room, onAdd }) {
 
       <div
         style={{
-          backgroundColor: "var(--primary)",
+          backgroundColor: cardBgColor,
           color: "var(--primary-foreground)",
           borderRadius: "16px",
           padding: "25px",
@@ -573,20 +606,11 @@ function Habitaciones() {
         </div>
         <div className="rate-board">
           {roomRates.map((rate, index) => {
-            const isColored = index % 2 === 0;
-            const intensity = 25 + (index / 2) * 25;
-
             return (
               <article
                 className={index === 6 ? "rate-row rate-row-featured" : "rate-row"}
                 key={rate.room}
-                style={
-                  isColored
-                    ? {
-                        background: `color-mix(in oklab, var(--primary) ${intensity}%, color-mix(in oklab, var(--clay-deep) 88%, var(--cream)))`,
-                      }
-                    : undefined
-                }
+                style={{ background: getRoomRateColor(rate.room) }}
               >
                 <span className="rate-number">{String(index + 1).padStart(2, "0")}</span>
                 <div>
