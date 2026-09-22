@@ -163,9 +163,11 @@ function RoomCard({ room, onAdd }) {
       style={{ display: "flex", flexDirection: "column", gap: "15px", height: "100%" }}
     >
       <div
+        className="room-image-carousel"
         style={{
           position: "relative",
-          paddingTop: "66%",
+          width: "100%",
+          aspectRatio: "3 / 4",
           overflow: "hidden",
           backgroundColor: "var(--ink)",
           borderRadius: "16px",
@@ -206,7 +208,7 @@ function RoomCard({ room, onAdd }) {
                 left: 0,
                 width: "100%",
                 height: "100%",
-                objectFit: "contain",
+                objectFit: "cover",
                 zIndex: 1,
               }}
             />
@@ -632,7 +634,7 @@ function Habitaciones() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
               gap: "15px",
               margin: "0 auto",
             }}

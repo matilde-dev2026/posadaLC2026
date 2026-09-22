@@ -742,7 +742,9 @@ a {
   overflow-wrap: anywhere;
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 .contact-panel > a:hover {
   opacity: 0.8;
@@ -821,7 +823,9 @@ a {
   text-align: center;
   color: var(--cream);
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 .site-footer-top > a:last-child:hover,
 .footer-whatsapp-link:hover,
@@ -977,6 +981,18 @@ a {
     align-self: center;
     margin: 0 auto;
   }
+}
+
+/* Contenedor vertical para fotos de habitaciones en carrusel */
+.room-image-carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--ink);
+  border-radius: 16px;
+  border: 1px solid color-mix(in oklch, var(--ink) 15%, transparent);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 @media (prefers-reduced-motion: reduce) {
