@@ -56,7 +56,7 @@ const roomRates = [
 const amenities = [
   { icon: BedDouble, label: "Baño privado" },
   { icon: Waves, label: "Agua caliente" },
-  { icon: Tv, label: "TV por cable" },
+  { icon: Tv, label: "TV" },
   { icon: Wifi, label: "Wi-Fi" },
   { icon: CarFront, label: "Estacionamiento gratis" },
   { icon: Coffee, label: "Restaurante y café" },
